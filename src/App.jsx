@@ -9,12 +9,12 @@ function App() {
   const data = useGlobalContext();
   console.log(data);
   return (
-    <>
+    <main>
       <Navbar />
       <Sidebar />
       <Hero />
       <Submenu />
-    </>
+    </main>
   );
 }
 
