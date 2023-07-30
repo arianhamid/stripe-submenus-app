@@ -4,7 +4,18 @@ import { FaBars } from "react-icons/fa";
 import { useGlobalContext } from "./context";
 
 const Navbar = () => {
-  const { openSidebar, openSubmenu, closSubmenu } = useGlobalContext();
+  const { openSidebar, setIsSubmenuOpen, openSubmenu, closSubmenu } =
+    useGlobalContext();
+
+  const displaySubmenu = (e) => {
+    const pageName = e.target.textContent;
+    const tempBtn = e.target.getBoundingClientRect();
+    const center = (tempBtn.left + tempBtn.right) / 2;
+    const bottom = tempBtn.bottom - 3;
+    openSubmenu(pageName, { center, bottom });
+
+    return;
+  };
   return (
     <nav className="nav">
       <div className="nav-center">
@@ -16,13 +27,19 @@ const Navbar = () => {
         </div>
         <ul className="nav-links">
           <li>
-            <button className="link-btn">products</button>
+            <button className="link-btn" onMouseOver={displaySubmenu}>
+              products
+            </button>
           </li>
           <li>
-            <button className="link-btn">developers</button>
+            <button className="link-btn" onMouseOver={displaySubmenu}>
+              developers
+            </button>
           </li>
           <li>
-            <button className="link-btn">company</button>
+            <button className="link-btn" onMouseOver={displaySubmenu}>
+              company
+            </button>
           </li>
         </ul>
         <button className="btn signin-btn">Sign In</button>
