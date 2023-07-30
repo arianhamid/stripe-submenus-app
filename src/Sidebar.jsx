@@ -2,21 +2,36 @@ import React from "react";
 import { FaTimes } from "react-icons/fa";
 import sublinks from "./data";
 import Submenu from "./Submenu";
+import { useGlobalContext } from "./context";
 
 const Sidebar = () => {
+  const { isSidebarOpen, closeSidebar } = useGlobalContext();
   return (
-    <aside className="sidebar">
-      <div className="sidebar-container">
-        <button className="close-btn">
+    <aside
+      className={`${
+        isSidebarOpen ? "sidebar-wrapper show" : "sidebar-wrapper"
+      }`}
+    >
+      <div className="sidebar">
+        <button className="close-btn" onClick={closeSidebar}>
           <FaTimes />
         </button>
         <div className="sidebar-links">
-          {sublinks.map((link, index) => {
+          {sublinks.map((item, index) => {
+            const { links, page } = item;
             return (
               <article key={index}>
-                <h4>{link.page}</h4>
+                <h4>{page}</h4>
                 <div className="sidebar-sublinks">
-                  <Submenu />
+                  {links.map((link, index) => {
+                    const { url, icon, label } = link;
+                    return (
+                      <a href={url} key={index}>
+                        {icon}
+                        {label}
+                      </a>
+                    );
+                  })}
                 </div>
               </article>
             );
