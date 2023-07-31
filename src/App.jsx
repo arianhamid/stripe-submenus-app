@@ -7,7 +7,7 @@ import { useGlobalContext } from "./context";
 
 function App() {
   const data = useGlobalContext();
-  console.log(data);
+
   return (
     <main>
       <Navbar />
