@@ -4,7 +4,7 @@ import { FaBars } from "react-icons/fa";
 import { useGlobalContext } from "./context";
 
 const Navbar = () => {
-  const { openSidebar, setIsSubmenuOpen, openSubmenu, closSubmenu } =
+  const { openSidebar, setIsSubmenuOpen, openSubmenu, closeSubmenu } =
     useGlobalContext();
 
   const displaySubmenu = (e) => {
@@ -13,11 +13,14 @@ const Navbar = () => {
     const center = (tempBtn.left + tempBtn.right) / 2;
     const bottom = tempBtn.bottom - 3;
     openSubmenu(pageName, { center, bottom });
-
-    return;
+  };
+  const closeSubmenuHandler = (e) => {
+    if (!e.target.classList.contains("link-btn")) {
+      closeSubmenu();
+    }
   };
   return (
-    <nav className="nav">
+    <nav className="nav" onMouseOver={closeSubmenuHandler}>
       <div className="nav-center">
         <div className="nav-header">
           <img src={logo} alt="logo" className="nav-logo" />
@@ -27,11 +30,7 @@ const Navbar = () => {
         </div>
         <ul className="nav-links">
           <li>
-            <button
-              className="link-btn"
-              onMouseOver={displaySubmenu}
-              onMouseLeave={closSubmenu}
-            >
+            <button className="link-btn" onMouseOver={displaySubmenu}>
               products
             </button>
           </li>

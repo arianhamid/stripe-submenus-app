@@ -20,13 +20,11 @@ const AppProvider = ({ children }) => {
       return subLink.page === text;
     });
     setPage(selectedPage);
-    console.log(page);
   };
   const closeSidebar = () => {
     setIsSidebarOpen(false);
   };
   const closeSubmenu = () => {
-    console.log("object");
     setIsSubmenuOpen(false);
   };
   return (
